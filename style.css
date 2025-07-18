@@ -1,0 +1,123 @@
+/* static/style.css */
+
+/* Общий фон и контейнер */
+body {
+  background: linear-gradient(135deg, #8ec5fc 0%, #e0c3fc 100%);
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  margin: 0; padding: 0;
+  display: flex; justify-content: center; align-items: flex-start;
+  min-height: 100vh;
+}
+
+.survey-container {
+  background: #ffffffee;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.1);
+  max-width: 640px; width: 100%;
+  margin: 40px 20px;
+}
+
+/* Заголовок */
+.survey-container h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+/* Группы полей */
+.form-group {
+  margin-bottom: 24px;
+}
+.inline-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+
+.form-group label,
+.form-group p {
+  display: block;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 8px;
+}
+
+/* Селектор страны */
+.custom-select {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 2px solid #5e60ce;
+  border-radius: 8px;
+  background: #fafafa;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><polygon points='0,0 16,0 8,8' fill='%235e60ce'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+
+/* Кастомные чекбоксы/радио */
+.custom-option {
+  position: relative;
+  padding-left: 32px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 15px;
+  color: #333;
+}
+.custom-option input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+.custom-option span::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 20px; height: 20px;
+  border: 2px solid #5e60ce;
+  border-radius: 4px;
+  background: #fff;
+}
+.custom-option input:checked + span::after {
+  content: '✔';
+  position: absolute;
+  left: 3px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #5e60ce;
+}
+
+/* Поля ввода */
+.custom-select, textarea {
+  font-family: inherit;
+}
+
+/* Текстовое поле */
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #5e60ce;
+  border-radius: 8px;
+  font-size: 15px;
+  resize: vertical;
+}
+
+/* Кнопка отправки */
+button {
+  width: 100%;
+  padding: 14px;
+  font-size: 18px;
+  background: #5e60ce;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+button:hover {
+  background: #4ea8de;
+}

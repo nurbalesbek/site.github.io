@@ -1,0 +1,192 @@
+
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Опрос посетителей Геопарка Арал</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <style>
+    .survey-container {
+      background: #fff;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      max-width: 600px;
+      width: 100%;
+      margin: 40px auto;
+    }
+    .survey-container h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+    }
+    fieldset {
+      border: none;
+      margin-bottom: 25px;
+      padding: 0;
+    }
+    legend {
+      font-weight: bold;
+      margin-bottom: 12px;
+      font-size: 1.1em;
+      color: #333;
+    }
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .options input[type="radio"] {
+      display: none;
+    }
+    .options label {
+      flex: 1;
+      background: #f1f3f5;
+      padding: 12px 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      transition: background .3s, border-color .3s;
+    }
+    .options input[type="radio"]:checked + label {
+      background: #5e60ce;
+      color: #fff;
+      border-color: #5e60ce;
+    }
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-top: 5px;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+    button {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background: #5e60ce;
+      color: #fff;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background .3s;
+    }
+    button:hover {
+      background: #4ea8de;
+    }
+  </style>
+</head>
+<body>
+  <div class="survey-container">
+    <h2>Опрос посетителей Геопарка Арал</h2>
+    <form method="POST" action="/submit">
+
+      <fieldset>
+        <legend>1. Откуда вы? Страна</legend>
+        <select id="country" name="country" required>
+          <option value="" disabled selected>Выберите страну</option>
+          {% for c in countries %}
+            <option>{{ c }}</option>
+          {% endfor %}
+        </select>
+      </fieldset>
+
+      <fieldset>
+        <legend>2. Ваш пол</legend>
+        <div class="options">
+          <input type="radio" id="gender_male" name="gender" value="Мужской" required>
+          <label for="gender_male">Мужской</label>
+          <input type="radio" id="gender_female" name="gender" value="Женский">
+          <label for="gender_female">Женский</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>3. Возраст</legend>
+        <div class="options">
+          <input type="radio" id="age_20_35" name="age" value="20-35" required>
+          <label for="age_20_35">20-35</label>
+          <input type="radio" id="age_35_45" name="age" value="35-45">
+          <label for="age_35_45">35-45</label>
+          <input type="radio" id="age_45_plus" name="age" value="45+">
+          <label for="age_45_plus">45+</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>4. Вы были в походе с детьми?</legend>
+        <div class="options">
+          <input type="radio" id="with_children_yes" name="with_children" value="Да" required>
+          <label for="with_children_yes">Да</label>
+          <input type="radio" id="with_children_no" name="with_children" value="Нет">
+          <label for="with_children_no">Нет</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>5. Как выузнали про Геопарк Арал?</legend>
+        <div class="options">
+          <input type="radio" id="source_friends" name="source" value="От друзей" required>
+          <label for="source_friends">От друзей</label>
+          <input type="radio" id="source_online" name="source" value="Самостоятельно из интернета">
+          <label for="source_online">Самостоятельно из интернета</label>
+          <input type="radio" id="source_onplace" name="source" value="На месте">
+          <label for="source_onplace">На месте</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>6. Путешествуете как?</legend>
+        <div class="options">
+          <input type="radio" id="travel_group" name="travel_mode" value="В составе группы" required>
+          <label for="travel_group">В составе группы</label>
+          <input type="radio" id="travel_self" name="travel_mode" value="Самостоятельно">
+          <label for="travel_self">Самостоятельно</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>7. На сколько дней?</legend>
+        <div class="options">
+          <input type="radio" id="days_1_3" name="days" value="1-3 дней" required>
+          <label for="days_1_3">1-3 дней</label>
+          <input type="radio" id="days_3_5" name="days" value="3-5 дней">
+          <label for="days_3_5">3-5 дней</label>
+          <input type="radio" id="days_5_10" name="days" value="5-10 дней">
+          <label for="days_5_10">5-10 дней</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>8. Условия предпочтительны?</legend>
+        <div class="options">
+          <input type="radio" id="acc_comfort" name="accommodation" value="Комфортабельные" required>
+          <label for="acc_comfort">Комфортабельные</label>
+          <input type="radio" id="acc_camping" name="accommodation" value="Кемпинг">
+          <label for="acc_camping">Кемпинг</label>
+          <input type="radio" id="acc_any" name="accommodation" value="Неважно">
+          <label for="acc_any">Неважно</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>9. Предложения</legend>
+        <textarea id="suggestions" name="suggestions" placeholder="Ваши комментарии... (необязательно)"></textarea>
+      </fieldset>
+
+      <button type="submit">Отправить</button>
+    </form>
+  </div>
+</body>
+</html>
+```
